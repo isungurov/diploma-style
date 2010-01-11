@@ -187,3 +187,8 @@
     \section*{#1}
     \addcontentsline{toc}{section}{#1}
 }
+
+\RequirePackage{verbatim}
+\newenvironment{code}%
+  {\small\renewcommand{\baselinestretch}{0.93}\verbatim}%
+  {\endverbatim}
