@@ -1,6 +1,10 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{diploma}
 
+\newif\ifdraft
+\newif\iffinal\finaltrue
+\DeclareOption{draft}{\drafttrue\finalfalse}
+
 \ProcessOptions
 
 \RequirePackage[utf8]{inputenc}
@@ -14,10 +18,16 @@
 
 % поля
 \RequirePackage{geometry}
-\geometry{tmargin=2cm,bmargin=2cm,lmargin=2.5cm,rmargin=1cm,footskip=1.5em}
+\iffinal
+  \geometry{tmargin=2cm,bmargin=2cm,lmargin=2.5cm,rmargin=1cm,footskip=1.5em}
+\else
+  \geometry{tmargin=2cm,bmargin=1.5cm,lmargin=2cm,rmargin=1cm,bindingoffset=0cm}
+\fi
 
 % полуторный интервал
-\RequirePackage[onehalfspacing]{setspace}
+\iffinal
+  \RequirePackage[onehalfspacing]{setspace}
+\fi
 
 % гарнитура Times
 \RequirePackage{pscyr}
@@ -34,7 +44,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Оформление титульной страницы
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\RequirePackage{ulem}
+\RequirePackage[normalem]{ulem}
 
 \newcommand\typeDepartment[1]{\MakeUppercase #1}
 \newcommand\typeInstitution[1]{\MakeUppercase #1}
@@ -56,8 +66,12 @@
             \vfill
             {\typeTitle\@title}\\
             \vskip 1.5ex%
-            \large{Дипломная работа}
+            \large{Дипломная работа}\\
             \vfill
+            \ifdraft{%
+              \large{(черновик от \today)}
+              \vfill
+            }\fi
             \begin{tabular}{lp{15em}}%
                 Студент гр. \@group & {\typeName\@author}\newline
                 \\
@@ -104,7 +118,7 @@
 \usepackage[labelsep=period,small]{caption} % Таблица 1.1: -> Таблица 1.1., кегль 12
 
 \makeatletter
-\renewcommand\section{\clearpage\@startsection {section}{1}{\z@} % разрыв страницы перед разделом
+\renewcommand\section{\iffinal\clearpage\fi\@startsection {section}{1}{\z@} % разрыв страницы перед разделом
                                    {-3.5ex \@plus -1ex \@minus -.2ex}
                                    {2.3ex \@plus.2ex}
                                    {\normalfont\large\centering\bfseries}} % 16, полужирый
