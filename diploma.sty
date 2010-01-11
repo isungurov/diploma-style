@@ -98,6 +98,27 @@
 \department{Федеральное агентство по образованию}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Аннотация
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\keywords}[1]{\gdef\@keywords{#1}}
+\newenvironment{annotation}{
+  \begin{titlepage}
+  \begin{center}
+    \noindent\typeInstitution{\@institution} \\
+    \vskip 2ex
+    \large{\MakeUppercase{\textbf{Аннотация}}} \\
+    \normalsize{К дипломной работе}
+  \end{center}
+  \par
+}{
+  \par\vskip 2ex\noindent
+  Ключевые слова: \@keywords.
+  \end{titlepage}
+  \setcounter{page}{2}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Оформление текста
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
